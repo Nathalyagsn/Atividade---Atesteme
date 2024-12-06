@@ -1,4 +1,5 @@
 // Elementos
+const iconsContainer = document.getElementById('icon-container');
 const icons = document.querySelectorAll('.icon');
 const dropzones = document.querySelectorAll('.dropzone');
 const verifyButton = document.getElementById('verify');
@@ -8,6 +9,20 @@ const restartButton = document.getElementById('restart');
 
 let timeRemaining = 30; // Tempo em segundos
 let timerInterval;
+
+// Função para embaralhar os ícones
+const shuffleIcons = () => {
+  const iconsArray = Array.from(iconsContainer.children); // Converte os ícones em um array
+
+  // Embaralha os ícones com o algoritmo Fisher-Yates
+  for (let i = iconsArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [iconsArray[i], iconsArray[j]] = [iconsArray[j], iconsArray[i]];
+  }
+
+  // Reinsere os ícones no contêiner na nova ordem
+  iconsArray.forEach(icon => iconsContainer.appendChild(icon));
+};
 
 // Função para iniciar o timer
 const startTimer = () => {
@@ -74,10 +89,11 @@ verifyButton.addEventListener('click', () => {
   verifyOrganization();
 });
 
-// Iniciar o jogo
+// Embaralha os ícones e inicia o jogo
+shuffleIcons();
 startTimer();
 
-
+// Reiniciar o jogo
 restartButton.addEventListener('click', () => {
   location.reload(); // Recarrega a página
 });
