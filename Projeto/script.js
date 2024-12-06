@@ -4,6 +4,7 @@ const dropzones = document.querySelectorAll('.dropzone');
 const verifyButton = document.getElementById('verify');
 const message = document.getElementById('message');
 const timeDisplay = document.getElementById('time');
+const restartButton = document.getElementById('restart');
 
 let timeRemaining = 30; // Tempo em segundos
 let timerInterval;
@@ -75,3 +76,8 @@ verifyButton.addEventListener('click', () => {
 
 // Iniciar o jogo
 startTimer();
+
+
+restartButton.addEventListener('click', () => {
+  location.reload(); // Recarrega a página
+});

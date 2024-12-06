@@ -37,16 +37,38 @@ h1 {
   height: 50px;
 }
 
+.dropzones-container {
+  display: flex;
+  justify-content: space-around;
+  position: fixed; /* Fixa na parte inferior */
+  bottom: 20px; /* Alinha ao final da página */
+  width: 100%; /* Garante largura total */
+  background: rgba(40, 44, 52, 0.9); /* Fundo semi-transparente */
+  padding: 20px 0;
+}
+
+.dropzone-wrapper {
+  display: flex;
+  flex-direction: column; /* Alinha o título acima da caixa */
+  align-items: center;
+}
+
+.dropzone-title {
+  font-size: 16px;
+  color: white;
+  margin-bottom: 10px; /* Espaçamento entre o título e a caixa */
+}
+
 .dropzone {
   border: 2px dashed white;
-  padding: 20px;
-  margin: 20px;
-  width: 150px;
-  height: 150px;
+  width: 250px; /* Largura das caixas */
+  height: 150px; /* Altura das caixas */
+  background: rgba(255, 255, 255, 0.1); /* Fundo levemente transparente */
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 
 .dropzone.correct {
   border-color: green;
@@ -60,9 +82,21 @@ button {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  margin: 10px;
 }
 
-#message {
-  margin-top: 20px;
-  font-size: 18px;
+button#restart {
+  background-color: #ff4c4c; /* Vermelho para destacar */
+  color: white;
+  border: none;
+  border-radius: 5px;
 }
+
+button#restart:hover {
+  background-color: #ff7878; /* Vermelho mais claro ao passar o mouse */
+}
+
+.controls {
+  margin-top: 20px;
+}
+
