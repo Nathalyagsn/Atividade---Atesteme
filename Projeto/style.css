@@ -44,7 +44,7 @@ h1 {
   position: fixed; /* Fixa na parte inferior da tela */
   bottom: 20px; /* Define a distância do rodapé */
   width: 100%; /* Largura total da tela */
-  gap: 350px; /* Espaçamento entre as dropzones */
+  gap: 250px; /* Espaçamento entre as dropzones */
 }
 
 .dropzone-wrapper {
@@ -63,7 +63,7 @@ h1 {
 
 .dropzone {
   border: 2px dashed white; /* Borda branca */
-  width: 150px; /* Largura fixa */
+  width: 250px; /* Largura fixa */
   height: 150px; /* Altura fixa */
   background: rgba(255, 255, 255, 0.1); /* Fundo levemente transparente */
   display: flex; /* Centraliza o conteúdo dentro da dropzone */
