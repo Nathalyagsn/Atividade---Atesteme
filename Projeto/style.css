@@ -39,12 +39,12 @@ h1 {
 
 .dropzones-container {
   display: flex; /* Define o layout flexbox */
-  justify-content: center; /* Centraliza as dropzones horizontalmente */
+  justify-content: left center; /* Centraliza as dropzones horizontalmente */
   align-items: center; /* Alinha as dropzones verticalmente */
   position: fixed; /* Fixa na parte inferior da tela */
   bottom: 20px; /* Define a distância do rodapé */
   width: 100%; /* Largura total da tela */
-  gap: 30px; /* Espaçamento entre as dropzones */
+  gap: 350px; /* Espaçamento entre as dropzones */
 }
 
 .dropzone-wrapper {
@@ -54,7 +54,7 @@ h1 {
 }
 
 .dropzone-title {
-  margin-bottom: 10px; /* Espaçamento entre o título e a dropzone */
+  margin-bottom: 20px; /* Espaçamento entre o título e a dropzone */
   color: white;
   font-size: 16px;
   font-weight: bold;
@@ -139,7 +139,7 @@ button#restart:hover {
 
 #mac-frame {
   position: relative;
-  width: 90%; /* Largura da moldura */
+  width: 70%; /* Largura da moldura */
   max-width: 1200px; /* Largura máxima */
   height: 700px; /* Altura da moldura */
   margin: 50px auto; /* Centraliza a moldura na página */
