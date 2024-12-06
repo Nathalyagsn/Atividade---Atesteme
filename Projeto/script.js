@@ -11,6 +11,7 @@ const iconContainer = document.getElementById('icon-container');
 
 let timeRemaining = 30; // Tempo em segundos
 let timerInterval;
+let iconsInDropzones = 0; // Contador de ícones nas dropzones
 
 // Função para embaralhar os ícones
 const shuffleIcons = () => {
@@ -42,7 +43,6 @@ const startTimer = () => {
 startButton.addEventListener('click', () => {
   startScreen.style.display = 'none'; // Esconde a tela inicial
   gameContainer.style.display = 'block'; // Exibe o jogo
-  verifyButton.style.display = 'inline-block'; // Exibe o botão "Verificar"
 
   shuffleIcons(); // Embaralha os ícones
   startTimer(); // Inicia o timer
@@ -64,14 +64,26 @@ dropzones.forEach(zone => {
 
   zone.addEventListener('drop', (e) => {
     e.preventDefault();
+
     const draggedType = e.dataTransfer.getData('type');
     const draggedId = e.dataTransfer.getData('id');
     const zoneType = zone.getAttribute('data-type');
 
     if (draggedType === zoneType) {
       const draggedElement = document.getElementById(draggedId);
+
+      // Evita múltiplos drops do mesmo ícone
+      if (!draggedElement.parentElement.classList.contains('dropzone')) {
+        iconsInDropzones++; // Incrementa o contador de ícones nas dropzones
+      }
+
       zone.appendChild(draggedElement);
       zone.classList.add('correct');
+
+      // Verifica se todos os ícones foram movidos
+      if (iconsInDropzones === icons.length) {
+        verifyButton.style.display = 'inline-block'; // Exibe o botão "Verificar"
+      }
     } else {
       zone.classList.add('wrong');
     }
