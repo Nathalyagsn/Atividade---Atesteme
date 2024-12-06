@@ -38,45 +38,56 @@ h1 {
 }
 
 .dropzones-container {
-  display: flex;
-  justify-content: space-around;
-  position: fixed; /* Fixa na parte inferior */
-  bottom: 20px; /* Alinha ao final da página */
-  width: 100%; /* Garante largura total */
-  background: rgba(40, 44, 52, 0.9); /* Fundo semi-transparente */
-  padding: 20px 0;
+  display: flex; /* Define o layout flexbox */
+  justify-content: center; /* Centraliza as dropzones horizontalmente */
+  align-items: center; /* Alinha as dropzones verticalmente */
+  position: fixed; /* Fixa na parte inferior da tela */
+  bottom: 20px; /* Define a distância do rodapé */
+  width: 100%; /* Largura total da tela */
+  gap: 30px; /* Espaçamento entre as dropzones */
 }
 
 .dropzone-wrapper {
   display: flex;
-  flex-direction: column; /* Alinha o título acima da caixa */
-  align-items: center;
+  flex-direction: column; /* Organiza o título acima da dropzone */
+  align-items: center; /* Centraliza o título e a dropzone */
 }
 
 .dropzone-title {
-  font-size: 16px;
+  margin-bottom: 10px; /* Espaçamento entre o título e a dropzone */
   color: white;
-  margin-bottom: 10px; /* Espaçamento entre o título e a caixa */
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
 }
 
 .dropzone {
-  border: 2px dashed white;
-  width: 250px; /* Largura das caixas */
-  height: 150px; /* Altura das caixas */
+  border: 2px dashed white; /* Borda branca */
+  width: 150px; /* Largura fixa */
+  height: 150px; /* Altura fixa */
   background: rgba(255, 255, 255, 0.1); /* Fundo levemente transparente */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: flex; /* Centraliza o conteúdo dentro da dropzone */
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  border-radius: 10px; /* Bordas arredondadas */
+  transition: all 0.3s ease; /* Suaviza mudanças visuais */
 }
 
+.dropzone:hover {
+  background: rgba(255, 255, 255, 0.2); /* Realce ao passar o mouse */
+}
 
 .dropzone.correct {
-  border-color: green;
+  border-color: #28a745; /* Verde para correto */
+  background-color: rgba(40, 167, 69, 0.2); /* Fundo verde claro */
 }
 
 .dropzone.wrong {
-  border-color: red;
+  border-color: #dc3545; /* Vermelho para incorreto */
+  background-color: rgba(220, 53, 69, 0.2); /* Fundo vermelho claro */
 }
+
+
 
 button {
   padding: 10px 20px;
@@ -157,6 +168,6 @@ button#restart:hover {
   left: 0;
   width: 100%;
   height: calc(100% - 30px); /* Ajusta a altura para deixar espaço para a barra superior */
-  background: #ffffff; /* Fundo branco para o jogo */
+  background: #5a5151; /* Fundo branco para o jogo */
 }
 
