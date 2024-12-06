@@ -5,24 +5,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Organize os Ícones</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="favicon/favicon-16x16.png" type="image/x-icon">
 </head>
 <body>
   <h1>Área de Trabalho Virtual</h1>
   <p>Arraste os ícones para os locais corretos antes que o tempo acabe!</p>
 
+  <div class="timer">
+    Tempo restante: <span id="time">30</span> segundos
+  </div>
+
   <div class="desktop">
     <!-- Ícones -->
     <div class="icon" draggable="true" data-type="file">
-      <img src="https://cdn-icons-png.flaticon.com/512/833/833524.png" alt="Arquivo">
-      <span>Arquivo</span>
+      <img src="icons/iconPdf.png" alt="PDF">
+      <span>PDF</span>
+    </div>
+    <div class="icon" draggable="true" data-type="file">
+      <img src="icons/iconDoc.png" alt="DOC">
+      <span>DOC</span>
+    </div>
+    <div class="icon" draggable="true" data-type="file">
+      <img src="icons/iconTxt.png" alt="TXT">
+      <span>TXT</span>
     </div>
     <div class="icon" draggable="true" data-type="program">
-      <img src="https://cdn-icons-png.flaticon.com/512/888/888848.png" alt="Programa">
-      <span>Programa</span>
+      <img src="icons/iconDocker.png" alt="Docker">
+      <span>Docker</span>
+    </div>
+    <div class="icon" draggable="true" data-type="program">
+      <img src="icons/iconPostman.png" alt="Postman">
+      <span>Postman</span>
+    </div>
+    <div class="icon" draggable="true" data-type="program">
+      <img src="icons/iconVisualStudio.png" alt="Visual Studio">
+      <span>Visual Studio</span>
     </div>
     <div class="icon" draggable="true" data-type="folder">
-      <img src="https://cdn-icons-png.flaticon.com/512/833/833300.png" alt="Pasta">
-      <span>Pasta</span>
+      <img src="icons/iconPasta.png" alt="Pasta">
+      <span>Geral</span>
+    </div>
+    <div class="icon" draggable="true" data-type="folder">
+      <img src="icons/iconPastaFotos.png" alt="Fotos">
+      <span>Fotos</span>
+    </div>
+    <div class="icon" draggable="true" data-type="folder">
+      <img src="icons/iconPastaVideo.png" alt="Vídeos">
+      <span>Vídeos</span>
     </div>
   </div>
 
