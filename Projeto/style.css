@@ -54,7 +54,7 @@ h1 {
 }
 
 .dropzone-title {
-  margin-bottom: 20px; /* Espaçamento entre o título e a dropzone */
+  margin-bottom: 1px; /* Espaçamento entre o título e a dropzone */
   color: white;
   font-size: 16px;
   font-weight: bold;
