@@ -1,27 +1,28 @@
 // Elementos
-const iconsContainer = document.getElementById('icon-container');
+const startButton = document.getElementById('start-button');
+const startScreen = document.getElementById('start-screen');
+const gameContainer = document.getElementById('game-container');
 const icons = document.querySelectorAll('.icon');
 const dropzones = document.querySelectorAll('.dropzone');
 const verifyButton = document.getElementById('verify');
 const message = document.getElementById('message');
 const timeDisplay = document.getElementById('time');
-const restartButton = document.getElementById('restart');
 
 let timeRemaining = 30; // Tempo em segundos
 let timerInterval;
 
 // Função para embaralhar os ícones
 const shuffleIcons = () => {
-  const iconsArray = Array.from(iconsContainer.children); // Converte os ícones em um array
+  const iconContainer = document.getElementById('icon-container');
+  const iconsArray = Array.from(iconContainer.children);
 
-  // Embaralha os ícones com o algoritmo Fisher-Yates
+  // Embaralha os ícones usando Fisher-Yates
   for (let i = iconsArray.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [iconsArray[i], iconsArray[j]] = [iconsArray[j], iconsArray[i]];
   }
 
-  // Reinsere os ícones no contêiner na nova ordem
-  iconsArray.forEach(icon => iconsContainer.appendChild(icon));
+  iconsArray.forEach(icon => iconContainer.appendChild(icon));
 };
 
 // Função para iniciar o timer
@@ -37,22 +38,41 @@ const startTimer = () => {
   }, 1000);
 };
 
+// Evento para iniciar o jogo
+startButton.addEventListener('click', () => {
+  startScreen.style.display = 'none'; // Esconde a tela inicial
+  gameContainer.style.display = 'block'; // Exibe o jogo
+  verifyButton.style.display = 'inline-block'; // Exibe o botão "Verificar"
+
+  shuffleIcons(); // Embaralha os ícones
+  startTimer(); // Inicia o timer
+});
+
 // Permitir arrastar os ícones
 icons.forEach(icon => {
   icon.addEventListener('dragstart', (e) => {
-    e.dataTransfer.setData('type', icon.getAttribute('data-type'));
+    e.dataTransfer.setData('type', icon.getAttribute('data-type')); // Define o tipo do ícone
+    e.dataTransfer.setData('id', icon.id); // Passa o ID do ícone
   });
 });
 
-// Permitir soltar nas zonas corretas
+// Permitir que as zonas aceitem o drop
 dropzones.forEach(zone => {
-  zone.addEventListener('dragover', (e) => e.preventDefault());
+  zone.addEventListener('dragover', (e) => {
+    e.preventDefault(); // Necessário para permitir o drop
+  });
 
   zone.addEventListener('drop', (e) => {
     e.preventDefault();
-    const type = e.dataTransfer.getData('type');
-    if (zone.getAttribute('data-type') === type) {
-      zone.appendChild(document.querySelector(`.icon[data-type="${type}"]`));
+
+    const draggedType = e.dataTransfer.getData('type'); // Recupera o tipo do ícone arrastado
+    const zoneType = zone.getAttribute('data-type'); // Recupera o tipo da dropzone
+
+    if (draggedType === zoneType) {
+      // Adiciona o ícone arrastado à zona
+      const draggedId = e.dataTransfer.getData('id');
+      const draggedElement = document.getElementById(draggedId);
+      zone.appendChild(draggedElement);
       zone.classList.add('correct');
     } else {
       zone.classList.add('wrong');
@@ -60,9 +80,10 @@ dropzones.forEach(zone => {
   });
 });
 
-// Verificar organização
+// Função para verificar a organização
 const verifyOrganization = () => {
   let correct = true;
+
   dropzones.forEach(zone => {
     const children = zone.querySelectorAll('.icon');
     children.forEach(child => {
@@ -79,21 +100,10 @@ const verifyOrganization = () => {
     message.textContent = 'Você errou! O código da sua atividade é 67890.';
     message.style.color = 'red';
   }
-
-  verifyButton.disabled = true; // Desativa o botão após a verificação
 };
 
 // Botão de verificar
 verifyButton.addEventListener('click', () => {
   clearInterval(timerInterval); // Para o timer ao clicar em verificar
   verifyOrganization();
-});
-
-// Embaralha os ícones e inicia o jogo
-shuffleIcons();
-startTimer();
-
-// Reiniciar o jogo
-restartButton.addEventListener('click', () => {
-  location.reload(); // Recarrega a página
 });
