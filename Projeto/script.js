@@ -7,13 +7,13 @@ const dropzones = document.querySelectorAll('.dropzone');
 const verifyButton = document.getElementById('verify');
 const message = document.getElementById('message');
 const timeDisplay = document.getElementById('time');
+const iconContainer = document.getElementById('icon-container');
 
 let timeRemaining = 30; // Tempo em segundos
 let timerInterval;
 
 // Função para embaralhar os ícones
 const shuffleIcons = () => {
-  const iconContainer = document.getElementById('icon-container');
   const iconsArray = Array.from(iconContainer.children);
 
   // Embaralha os ícones usando Fisher-Yates
@@ -64,13 +64,11 @@ dropzones.forEach(zone => {
 
   zone.addEventListener('drop', (e) => {
     e.preventDefault();
-
-    const draggedType = e.dataTransfer.getData('type'); // Recupera o tipo do ícone arrastado
-    const zoneType = zone.getAttribute('data-type'); // Recupera o tipo da dropzone
+    const draggedType = e.dataTransfer.getData('type');
+    const draggedId = e.dataTransfer.getData('id');
+    const zoneType = zone.getAttribute('data-type');
 
     if (draggedType === zoneType) {
-      // Adiciona o ícone arrastado à zona
-      const draggedId = e.dataTransfer.getData('id');
       const draggedElement = document.getElementById(draggedId);
       zone.appendChild(draggedElement);
       zone.classList.add('correct');
