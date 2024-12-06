@@ -125,3 +125,38 @@ button#restart:hover {
 #game-container {
   display: none;
 }
+
+#mac-frame {
+  position: relative;
+  width: 90%; /* Largura da moldura */
+  max-width: 1200px; /* Largura máxima */
+  height: 700px; /* Altura da moldura */
+  margin: 50px auto; /* Centraliza a moldura na página */
+  background: #2c2c2e; /* Cor do fundo da moldura */
+  border-radius: 20px; /* Bordas arredondadas, estilo Mac */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra externa */
+  overflow: hidden; /* Garante que nada saia da moldura */
+  border: 8px solid #1c1c1e; /* Cor da borda externa */
+}
+
+#mac-frame::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px; /* Largura do botão do topo */
+  height: 6px; /* Altura do botão do topo */
+  background: #8e8e93; /* Cor do detalhe do botão */
+  border-radius: 3px;
+}
+
+#game-container {
+  position: absolute;
+  top: 30px; /* Espaçamento para simular a barra superior */
+  left: 0;
+  width: 100%;
+  height: calc(100% - 30px); /* Ajusta a altura para deixar espaço para a barra superior */
+  background: #ffffff; /* Fundo branco para o jogo */
+}
+

@@ -8,79 +8,81 @@
   <link rel="shortcut icon" href="favicon/favicon-16x16.png" type="image/x-icon">
 </head>
 <body>
-  <!-- Tela inicial com o botão "Iniciar" -->
-  <div id="start-screen">
-    <button id="start-button">Iniciar</button>
-  </div>
-
-  <!-- Jogo (invisível inicialmente) -->
-  <div id="game-container" style="display: none;">
-    <h1>Área de Trabalho Virtual</h1>
-    <p>Arraste os ícones para os locais corretos antes que o tempo acabe!</p>
-
-    <div class="timer">
-      Tempo restante: <span id="time">30</span> segundos
+  <div id="mac-frame">
+    <!-- Tela inicial com o botão "Iniciar" -->
+    <div id="start-screen">
+      <button id="start-button">Iniciar</button>
     </div>
 
-    <div class="desktop" id="icon-container">
-      <div class="icon" id="icon-pdf" draggable="true" data-type="file">
-        <img src="icons/iconPdf.png" alt="PDF">
-        <span>PDF</span>
-      </div>
-      <div class="icon" id="icon-doc" draggable="true" data-type="file">
-        <img src="icons/iconDoc.png" alt="DOC">
-        <span>DOC</span>
-      </div>
-      <div class="icon" id="icon-txt" draggable="true" data-type="file">
-        <img src="icons/iconTxt.png" alt="TXT">
-        <span>TXT</span>
-      </div>
-      <div class="icon" id="icon-docker" draggable="true" data-type="program">
-        <img src="icons/iconDocker.png" alt="Docker">
-        <span>Docker</span>
-      </div>
-      <div class="icon" id="icon-postman" draggable="true" data-type="program">
-        <img src="icons/iconPostman.png" alt="Postman">
-        <span>Postman</span>
-      </div>
-      <div class="icon" id="icon-vs" draggable="true" data-type="program">
-        <img src="icons/iconVisualStudio.png" alt="Visual Studio">
-        <span>Visual Studio</span>
-      </div>
-      <div class="icon" id="icon-folder-general" draggable="true" data-type="folder">
-        <img src="icons/iconPasta.png" alt="Pasta">
-        <span>Pasta Geral</span>
-      </div>
-      <div class="icon" id="icon-folder-photos" draggable="true" data-type="folder">
-        <img src="icons/iconPastaFotos.png" alt="Fotos">
-        <span>Fotos</span>
-      </div>
-      <div class="icon" id="icon-folder-videos" draggable="true" data-type="folder">
-        <img src="icons/iconPastaVideo.png" alt="Vídeos">
-        <span>Vídeos</span>
-      </div>
-    </div>
+    <!-- Jogo (invisível inicialmente) -->
+    <div id="game-container" style="display: none;">
+      <h1>Área de Trabalho Virtual</h1>
+      <p>Arraste os ícones para os locais corretos antes que o tempo acabe!</p>
 
-    <!-- Áreas de drop -->
-    <div class="dropzones-container">
-      <div class="dropzone-wrapper">
-        <span class="dropzone-title">Arquivos</span>
-        <div class="dropzone" data-type="file"></div>
+      <div class="timer">
+        Tempo restante: <span id="time">30</span> segundos
       </div>
-      <div class="dropzone-wrapper">
-        <span class="dropzone-title">Programas</span>
-        <div class="dropzone" data-type="program"></div>
-      </div>
-      <div class="dropzone-wrapper">
-        <span class="dropzone-title">Pastas</span>
-        <div class="dropzone" data-type="folder"></div>
-      </div>
-    </div>
 
-    <div class="controls">
-      <button id="verify" style="display: none;">Verificar</button>
+      <div class="desktop" id="icon-container">
+        <div class="icon" id="icon-pdf" draggable="true" data-type="file">
+          <img src="icons/iconPdf.png" alt="PDF">
+          <span>PDF</span>
+        </div>
+        <div class="icon" id="icon-doc" draggable="true" data-type="file">
+          <img src="icons/iconDoc.png" alt="DOC">
+          <span>DOC</span>
+        </div>
+        <div class="icon" id="icon-txt" draggable="true" data-type="file">
+          <img src="icons/iconTxt.png" alt="TXT">
+          <span>TXT</span>
+        </div>
+        <div class="icon" id="icon-docker" draggable="true" data-type="program">
+          <img src="icons/iconDocker.png" alt="Docker">
+          <span>Docker</span>
+        </div>
+        <div class="icon" id="icon-postman" draggable="true" data-type="program">
+          <img src="icons/iconPostman.png" alt="Postman">
+          <span>Postman</span>
+        </div>
+        <div class="icon" id="icon-vs" draggable="true" data-type="program">
+          <img src="icons/iconVisualStudio.png" alt="Visual Studio">
+          <span>Visual Studio</span>
+        </div>
+        <div class="icon" id="icon-folder-general" draggable="true" data-type="folder">
+          <img src="icons/iconPasta.png" alt="Pasta">
+          <span>Pasta Geral</span>
+        </div>
+        <div class="icon" id="icon-folder-photos" draggable="true" data-type="folder">
+          <img src="icons/iconPastaFotos.png" alt="Fotos">
+          <span>Fotos</span>
+        </div>
+        <div class="icon" id="icon-folder-videos" draggable="true" data-type="folder">
+          <img src="icons/iconPastaVideo.png" alt="Vídeos">
+          <span>Vídeos</span>
+        </div>
+      </div>
+
+      <!-- Áreas de drop -->
+      <div class="dropzones-container">
+        <div class="dropzone-wrapper">
+          <span class="dropzone-title">Arquivos</span>
+          <div class="dropzone" data-type="file"></div>
+        </div>
+        <div class="dropzone-wrapper">
+          <span class="dropzone-title">Programas</span>
+          <div class="dropzone" data-type="program"></div>
+        </div>
+        <div class="dropzone-wrapper">
+          <span class="dropzone-title">Pastas</span>
+          <div class="dropzone" data-type="folder"></div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="verify" style="display: none;">Verificar</button>
+      </div>
+      <p id="message"></p>
     </div>
-    <p id="message"></p>
   </div>
 
   <script src="script.js"></script>
