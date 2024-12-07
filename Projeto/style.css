@@ -52,8 +52,10 @@ h1 {
   left: 0;
   width: 100%;
   height: calc(100% - 30px); /* Ajusta a altura para deixar espaço para a barra superior */
-  background: #5a5151; /* Fundo branco para o jogo */
-  
+  background-image: url('imagens/imagemFundo.jpg'); /* Substitua pela URL da imagem */
+  background-size: cover; /* Faz a imagem cobrir toda a área */
+  background-position: center; /* Centraliza a imagem */
+  background-repeat: no-repeat; /* Impede que a imagem se repita */
 }
 
 /* Tela inicial */
