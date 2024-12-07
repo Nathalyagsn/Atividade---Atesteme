@@ -45,19 +45,6 @@ h1 {
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.5); /* Adiciona uma leve sombra */
 }
 
-/* Área de jogo */
-#game-container {
-  position: absolute;
-  top: 30px; /* Espaçamento para simular a barra superior */
-  left: 0;
-  width: 100%;
-  height: calc(100% - 30px); /* Ajusta a altura para deixar espaço para a barra superior */
-  background-image: url('imagens/imagemFundo.jpg'); /* Substitua pela URL da imagem */
-  background-size: cover; /* Faz a imagem cobrir toda a área */
-  background-position: center; /* Centraliza a imagem */
-  background-repeat: no-repeat; /* Impede que a imagem se repita */
-}
-
 /* Tela inicial */
 #start-screen {
   display: flex;
@@ -87,6 +74,19 @@ h1 {
 
 #start-button:hover {
   background-color: #005bb5;
+}
+
+/* Área de jogo */
+#game-container {
+  position: absolute;
+  top: 30px; /* Espaçamento para simular a barra superior */
+  left: 0;
+  width: 100%;
+  height: calc(100% - 30px); /* Ajusta a altura para deixar espaço para a barra superior */
+  background-image: url('imagens/imagemFundo.jpg'); /* Substitua pela URL da imagem */
+  background-size: cover; /* Faz a imagem cobrir toda a área */
+  background-position: center; /* Centraliza a imagem */
+  background-repeat: no-repeat; /* Impede que a imagem se repita */
 }
 
 /* Ícones */
@@ -138,7 +138,7 @@ h1 {
 
 .dropzone {
   position: relative; /* Necessário para posicionar a barrinha interna */
-  width: 250px; /* Largura fixa */
+  width: 280px; /* Largura fixa */
   height: 150px; /* Altura fixa */
   background: #2c2c2e; /* Fundo estilo Finder */
   border: 1px solid #444; /* Borda escura */
@@ -178,25 +178,25 @@ h1 {
   background-color: rgba(220, 53, 69, 0.2); /* Fundo vermelho claro */
 }
 
-/* Botão de reinício no canto superior direito */
+/* Botão de reinício */
 #restart-icon {
   position: fixed;
-  top: 10px; /* Distância do topo */
-  right: 10px; /* Distância da borda direita */
-  z-index: 1000; /* Garante que fique acima de outros elementos */
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
 }
 
 #restart-button {
   background: transparent;
   border: none;
-  font-size: 24px; /* Tamanho do ícone */
+  font-size: 24px;
   cursor: pointer;
   color: white;
 }
 
 #restart-button:hover {
-  color: #28a745; /* Cor verde ao passar o mouse */
-  transform: scale(1.1); /* Aumenta ligeiramente o botão no hover */
+  color: #28a745; /* Verde */
+  transform: scale(1.1);
   transition: all 0.3s ease;
 }
 

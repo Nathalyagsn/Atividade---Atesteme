@@ -8,29 +8,31 @@
   <link rel="shortcut icon" href="favicon/favicon-16x16.png" type="image/x-icon">
 </head>
 <body>
-  <!-- Ícone de reinício fora do mac-frame -->
+  <!-- Ícone de reinício -->
   <div id="restart-icon" style="display: none;">
     <button id="restart-button" title="Reiniciar">🔄</button>
   </div>
 
   <div id="mac-frame">
-    <!-- Tela inicial com o botão "Iniciar" -->
+    <!-- Tela inicial com tutorial -->
     <div id="start-screen">
-      <h1>Vamos organizar a área de trabalho!</h1>
+      <h1>Bem-vindo ao Jogo de Organização!</h1>
       <button id="start-button">Iniciar</button>
-      
+      <p>Arraste os ícones para os locais corretos antes que o tempo acabe.  Use todos os ícones para ganhar pontos!</p>
+      <p>Clique em "Verificar" para validar suas respostas.</p>
     </div>
 
-    <!-- Jogo (invisível inicialmente) -->
+    <!-- Tela de jogo -->
     <div id="game-container" style="display: none;">
-      <h1>Área de Trabalho Virtual</h1>
-      <p>Arraste os ícones para os locais corretos antes que o tempo acabe!</p>
 
+      <!-- Temporizador -->
       <div class="timer">
         Tempo restante: <span id="time">30</span> segundos
       </div>
 
+      <!-- Ícones -->
       <div class="desktop" id="icon-container">
+        <!-- Ícones de arquivos -->
         <div class="icon" id="icon-pdf" draggable="true" data-type="file">
           <img src="icons/iconPdf.png" alt="PDF">
           <span>PDF</span>
@@ -43,6 +45,8 @@
           <img src="icons/iconTxt.png" alt="TXT">
           <span>TXT</span>
         </div>
+
+        <!-- Ícones de programas -->
         <div class="icon" id="icon-docker" draggable="true" data-type="program">
           <img src="icons/iconDocker.png" alt="Docker">
           <span>Docker</span>
@@ -55,6 +59,8 @@
           <img src="icons/iconVisualStudio.png" alt="Visual Studio">
           <span>Visual Studio</span>
         </div>
+
+        <!-- Ícones de pastas -->
         <div class="icon" id="icon-folder-general" draggable="true" data-type="folder">
           <img src="icons/iconPasta.png" alt="Pasta">
           <span>Geral</span>
@@ -82,9 +88,12 @@
         </div>
       </div>
 
+      <!-- Controles -->
       <div class="controls">
         <button id="verify" style="display: none;">Verificar</button>
       </div>
+
+      <!-- Mensagem de resultado -->
       <p id="message"></p>
     </div>
   </div>

@@ -12,22 +12,18 @@ const restartIcon = document.getElementById('restart-icon');
 const restartButton = document.getElementById('restart-button');
 
 // Variáveis de controle
-let timeRemaining = 30; // Tempo em segundos
+let timeRemaining = 30; // Tempo inicial
 let timerInterval;
-let iconsInDropzones = 0; // Contador de ícones nas dropzones
 let score = 0; // Pontuação inicial
-let gameVerified = false; // Controle para impedir verificações duplicadas
+let gameVerified = false; // Controle de verificação única
 
 // Função para embaralhar os ícones
 const shuffleIcons = () => {
   const iconsArray = Array.from(iconContainer.children);
-
-  // Embaralha os ícones usando Fisher-Yates
   for (let i = iconsArray.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [iconsArray[i], iconsArray[j]] = [iconsArray[j], iconsArray[i]];
   }
-
   iconsArray.forEach(icon => iconContainer.appendChild(icon));
 };
 
@@ -39,112 +35,109 @@ const startTimer = () => {
 
     if (timeRemaining <= 0) {
       clearInterval(timerInterval);
-      calculateScore(false); // Calcula a pontuação apenas com as dropzones
+      verifyOrganization(); // Verifica automaticamente ao término do tempo
     }
   }, 1000);
 };
 
-// Função para calcular a pontuação final
-const calculateScore = (addTime = true) => {
-  if (gameVerified) return; // Evita múltiplas verificações
-  gameVerified = true; // Marca o jogo como verificado
+// Função para verificar e calcular a pontuação
+const verifyOrganization = () => {
+  if (gameVerified) return; // Impede múltiplas verificações
+  gameVerified = true;
 
-  // Pontuação baseada nos ícones nas dropzones
+  // Para o timer
+  clearInterval(timerInterval);
+
+  let allCorrect = true; // Verifica se todos os ícones estão corretos
+  let allFilled = true; // Verifica se todas as dropzones estão preenchidas
+
   dropzones.forEach(zone => {
     const children = zone.querySelectorAll('.icon');
-    children.forEach(child => {
-      if (child.getAttribute('data-type') === zone.getAttribute('data-type')) {
-        score += 1; // Pontuação positiva para ícones corretos
-      } else {
-        score -= 1; // Pontuação negativa para ícones incorretos
-      }
-    });
+    if (children.length === 0) {
+      allFilled = false; // Dropzone vazia
+    } else {
+      children.forEach(child => {
+        if (child.getAttribute('data-type') !== zone.getAttribute('data-type')) {
+          allCorrect = false; // Ícone errado
+          score -= 1; // Pontuação negativa para ícone incorreto
+          zone.classList.add('wrong'); // Marca como erro
+        } else {
+          score += 1; // Pontuação positiva para ícone correto
+          zone.classList.add('correct'); // Marca como correto
+        }
+      });
+    }
   });
 
-  // Adiciona os pontos do tempo restante (se aplicável)
-  if (addTime && timeRemaining > 0) {
-    score += timeRemaining;
-  }
+  // Adiciona pontos do tempo restante
+  score += timeRemaining;
 
-  // Exibe a mensagem final em um pop-up
-  if (score > 0) {
-    alert(`Seu código é: ${score}`);
+  // Atualiza a mensagem de resultado
+  if (!allFilled) {
+    message.textContent = "Você precisa preencher todas as dropzones!";
+    message.style.color = "orange";
+  } else if (score > 0) {
+    message.textContent = `Seu código é: ${score}`;
+    message.style.color = "green";
   } else {
-    alert(`Organize para receber o código!`);
+    message.textContent = "Organize para receber o código!";
+    message.style.color = "red";
   }
 
-  // Esconde o botão "Verificar" após a verificação
-  verifyButton.style.display = 'none';
-  // Exibe o botão de reinício
+  // Exibe o botão de reinício após verificar
   restartIcon.style.display = 'block';
-};
-
-// Evento para verificar a organização
-const verifyOrganization = () => {
-  clearInterval(timerInterval); // Para o timer
-  calculateScore(); // Calcula os pontos finais e exibe a mensagem
+  verifyButton.style.display = 'none'; // Esconde o botão "Verificar"
 };
 
 // Evento para iniciar o jogo
 startButton.addEventListener('click', () => {
   startScreen.style.display = 'none'; // Esconde a tela inicial
   gameContainer.style.display = 'block'; // Exibe o jogo
-
   shuffleIcons(); // Embaralha os ícones
   startTimer(); // Inicia o timer
 });
 
-// Evento de clique para verificar a organização
+// Evento de clique no botão "Verificar"
 verifyButton.addEventListener('click', () => {
-  clearInterval(timerInterval); // Para o timer ao clicar em verificar
-  verifyOrganization();
+  verifyOrganization(); // Verifica a organização ao clicar
 });
 
 // Lógica de arrastar e soltar (drag and drop)
 icons.forEach(icon => {
-  icon.addEventListener('dragstart', (e) => {
-    e.dataTransfer.setData('type', icon.getAttribute('data-type')); // Define o tipo do ícone
-    e.dataTransfer.setData('id', icon.id); // Passa o ID do ícone
+  icon.addEventListener('dragstart', e => {
+    e.dataTransfer.setData('type', icon.getAttribute('data-type'));
+    e.dataTransfer.setData('id', icon.id);
   });
 });
 
 dropzones.forEach(zone => {
-  zone.addEventListener('dragover', (e) => {
+  zone.addEventListener('dragover', e => {
     e.preventDefault(); // Necessário para permitir o drop
   });
 
-  zone.addEventListener('drop', (e) => {
+  zone.addEventListener('drop', e => {
     e.preventDefault();
 
-    const draggedType = e.dataTransfer.getData('type');
     const draggedId = e.dataTransfer.getData('id');
-    const zoneType = zone.getAttribute('data-type');
-
     const draggedElement = document.getElementById(draggedId);
 
-    // Adiciona o elemento na dropzone correta
-    if (draggedType === zoneType) {
-      if (!draggedElement.parentElement.classList.contains('dropzone')) {
-        iconsInDropzones++; // Incrementa o contador de ícones nas dropzones
-      }
-
-      // Remove classes de erro, se existirem
-      zone.classList.remove('wrong');
-      zone.classList.add('correct');
-      zone.appendChild(draggedElement); // Move o ícone para a dropzone correta
-    } else {
-      // Marca como erro
-      zone.classList.add('wrong');
+    if (!zone.contains(draggedElement)) {
+      zone.appendChild(draggedElement); // Move o ícone para a dropzone
     }
 
     // Verifica se todos os ícones foram movidos
-    if (iconsInDropzones === icons.length) {
+    const totalIconsPlaced = Array.from(dropzones).reduce(
+      (sum, zone) => sum + zone.querySelectorAll('.icon').length,
+      0
+    );
+
+    if (totalIconsPlaced === icons.length) {
       verifyButton.style.display = 'inline-block'; // Exibe o botão "Verificar"
     }
   });
 });
 
-// Evento para reiniciar o jogo
+// Evento para reiniciar o jogo (recarregar a página)
 restartButton.addEventListener('click', () => {
   location.reload(); // Recarrega a página para reiniciar o jogo
 });
