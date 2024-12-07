@@ -125,7 +125,7 @@ h1 {
 .dropzone-wrapper {
   display: flex;
   flex-direction: column; /* Organiza o título acima da dropzone */
-  align-items: center; /* Centraliza o título e a dropzone */
+  align-items: center; /* Centraliza a barra indicativa horizontalmente */
 }
 
 .dropzone-title {
@@ -137,15 +137,31 @@ h1 {
 }
 
 .dropzone {
-  border: 2px dashed white; /* Borda branca */
+  position: relative; /* Necessário para posicionar a barrinha interna */
   width: 250px; /* Largura fixa */
   height: 150px; /* Altura fixa */
-  background: rgba(255, 255, 255, 0.1); /* Fundo levemente transparente */
-  display: flex; /* Centraliza o conteúdo dentro da dropzone */
+  background: #2c2c2e; /* Fundo estilo Finder */
+  border: 1px solid #444; /* Borda escura */
+  border-radius: 6px; /* Bordas levemente arredondadas */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); /* Sombra para profundidade */
+  display: flex; /* Flexbox para centralizar ícones */
   justify-content: center; /* Centraliza horizontalmente */
   align-items: center; /* Centraliza verticalmente */
-  border-radius: 10px; /* Bordas arredondadas */
-  transition: all 0.3s ease; /* Suaviza mudanças visuais */
+  overflow: hidden; /* Evita que elementos saiam da área */
+}
+
+.dropzone::after {
+  content: attr(data-type); /* Insere o texto com o tipo (file, folder, program) */
+  position: absolute;
+  bottom: 5px; /* Posiciona próximo ao fundo */
+  left: 50%; /* Centraliza horizontalmente */
+  transform: translateX(-50%);
+  font-size: 12px; /* Tamanho pequeno */
+  color: #ffffff; /* Cor do texto branca */
+  background: #0078d7; /* Fundo azul estilo barra Finder */
+  padding: 2px 10px; /* Pequena barra */
+  border-radius: 4px; /* Arredonda as bordas da barra */
+  text-transform: capitalize; /* Primeira letra em maiúsculo */
 }
 
 .dropzone:hover {
