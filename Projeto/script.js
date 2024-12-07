@@ -1,4 +1,4 @@
-// Elementos
+// Seleção de elementos do DOM
 const startButton = document.getElementById('start-button');
 const startScreen = document.getElementById('start-screen');
 const gameContainer = document.getElementById('game-container');
@@ -8,7 +8,10 @@ const verifyButton = document.getElementById('verify');
 const message = document.getElementById('message');
 const timeDisplay = document.getElementById('time');
 const iconContainer = document.getElementById('icon-container');
+const restartIcon = document.getElementById('restart-icon');
+const restartButton = document.getElementById('restart-button');
 
+// Variáveis de controle
 let timeRemaining = 30; // Tempo em segundos
 let timerInterval;
 let iconsInDropzones = 0; // Contador de ícones nas dropzones
@@ -39,6 +42,31 @@ const startTimer = () => {
   }, 1000);
 };
 
+// Função para verificar a organização
+const verifyOrganization = () => {
+  let correct = true;
+
+  dropzones.forEach(zone => {
+    const children = zone.querySelectorAll('.icon');
+    children.forEach(child => {
+      if (child.getAttribute('data-type') !== zone.getAttribute('data-type')) {
+        correct = false;
+      }
+    });
+  });
+
+  if (correct) {
+    message.textContent = 'Parabéns! O código da sua atividade é 12345.';
+    message.style.color = 'green';
+  } else {
+    message.textContent = 'Você errou! O código da sua atividade é 67890.';
+    message.style.color = 'red';
+  }
+
+  // Exibe o botão de reinício após a verificação
+  restartIcon.style.display = 'block';
+};
+
 // Evento para iniciar o jogo
 startButton.addEventListener('click', () => {
   startScreen.style.display = 'none'; // Esconde a tela inicial
@@ -48,7 +76,13 @@ startButton.addEventListener('click', () => {
   startTimer(); // Inicia o timer
 });
 
-// Permitir arrastar os ícones
+// Evento de clique para verificar a organização
+verifyButton.addEventListener('click', () => {
+  clearInterval(timerInterval); // Para o timer ao clicar em verificar
+  verifyOrganization();
+});
+
+// Lógica de arrastar e soltar (drag and drop)
 icons.forEach(icon => {
   icon.addEventListener('dragstart', (e) => {
     e.dataTransfer.setData('type', icon.getAttribute('data-type')); // Define o tipo do ícone
@@ -56,7 +90,6 @@ icons.forEach(icon => {
   });
 });
 
-// Permitir que as zonas aceitem o drop
 dropzones.forEach(zone => {
   zone.addEventListener('dragover', (e) => {
     e.preventDefault(); // Necessário para permitir o drop
@@ -90,30 +123,7 @@ dropzones.forEach(zone => {
   });
 });
 
-// Função para verificar a organização
-const verifyOrganization = () => {
-  let correct = true;
-
-  dropzones.forEach(zone => {
-    const children = zone.querySelectorAll('.icon');
-    children.forEach(child => {
-      if (child.getAttribute('data-type') !== zone.getAttribute('data-type')) {
-        correct = false;
-      }
-    });
-  });
-
-  if (correct) {
-    message.textContent = 'Parabéns! O código da sua atividade é 12345.';
-    message.style.color = 'green';
-  } else {
-    message.textContent = 'Você errou! O código da sua atividade é 67890.';
-    message.style.color = 'red';
-  }
-};
-
-// Botão de verificar
-verifyButton.addEventListener('click', () => {
-  clearInterval(timerInterval); // Para o timer ao clicar em verificar
-  verifyOrganization();
+// Evento para reiniciar o jogo
+restartButton.addEventListener('click', () => {
+  location.reload(); // Recarrega a página para reiniciar o jogo
 });

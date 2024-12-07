@@ -1,3 +1,4 @@
+/* Estilo global */
 body {
   font-family: Arial, sans-serif;
   text-align: center;
@@ -7,6 +8,7 @@ body {
   padding: 0;
 }
 
+/* Títulos */
 h1 {
   margin-top: 20px;
 }
@@ -16,6 +18,66 @@ h1 {
   margin: 20px 0;
 }
 
+/* Moldura do Mac */
+#mac-frame {
+  position: relative;
+  width: 70%; /* Largura da moldura */
+  max-width: 1200px; /* Largura máxima */
+  height: 700px; /* Altura da moldura */
+  margin: 50px auto; /* Centraliza a moldura na página */
+  background: #2c2c2e; /* Cor do fundo da moldura */
+  border-radius: 20px; /* Bordas arredondadas, estilo Mac */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra externa */
+  overflow: hidden; /* Garante que nada saia da moldura */
+  border: 8px solid #1c1c1e; /* Cor da borda externa */
+}
+
+#mac-frame::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px; /* Largura do botão do topo */
+  height: 6px; /* Altura do botão do topo */
+  background: #8e8e93; /* Cor do detalhe do botão */
+  border-radius: 3px;
+}
+
+/* Área de jogo */
+#game-container {
+  position: absolute;
+  top: 30px; /* Espaçamento para simular a barra superior */
+  left: 0;
+  width: 100%;
+  height: calc(100% - 30px); /* Ajusta a altura para deixar espaço para a barra superior */
+  background: #5a5151; /* Fundo branco para o jogo */
+}
+
+/* Tela inicial */
+#start-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+#start-button {
+  padding: 15px 30px;
+  font-size: 20px;
+  color: white;
+  background-color: #0078d7;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#start-button:hover {
+  background-color: #005bb5;
+}
+
+/* Ícones */
 .desktop {
   display: flex;
   flex-wrap: wrap;
@@ -37,14 +99,15 @@ h1 {
   height: 50px;
 }
 
+/* Áreas de drop */
 .dropzones-container {
-  display: flex; /* Define o layout flexbox */
+  display: flex;
   justify-content: left center; /* Centraliza as dropzones horizontalmente */
   align-items: center; /* Alinha as dropzones verticalmente */
   position: fixed; /* Fixa na parte inferior da tela */
   bottom: 20px; /* Define a distância do rodapé */
   width: 100%; /* Largura total da tela */
-  gap: 250px; /* Espaçamento entre as dropzones */
+  gap: 225px; /* Espaçamento entre as dropzones */
 }
 
 .dropzone-wrapper {
@@ -87,87 +150,32 @@ h1 {
   background-color: rgba(220, 53, 69, 0.2); /* Fundo vermelho claro */
 }
 
+/* Botão de reinício no canto superior direito */
+#restart-icon {
+  position: fixed;
+  top: 10px; /* Distância do topo */
+  right: 10px; /* Distância da borda direita */
+  z-index: 1000; /* Garante que fique acima de outros elementos */
+}
 
+#restart-button {
+  background: transparent;
+  border: none;
+  font-size: 24px; /* Tamanho do ícone */
+  cursor: pointer;
+  color: white;
+}
 
+#restart-button:hover {
+  color: #28a745; /* Cor verde ao passar o mouse */
+  transform: scale(1.1); /* Aumenta ligeiramente o botão no hover */
+  transition: all 0.3s ease;
+}
+
+/* Botão genérico */
 button {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
   margin: 10px;
 }
-
-button#restart {
-  background-color: #ff4c4c; /* Vermelho para destacar */
-  color: white;
-  border: none;
-  border-radius: 5px;
-}
-
-button#restart:hover {
-  background-color: #ff7878; /* Vermelho mais claro ao passar o mouse */
-}
-
-.controls {
-  margin-top: 20px;
-}
-
-#start-screen {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.8);
-}
-
-#start-button {
-  padding: 15px 30px;
-  font-size: 20px;
-  color: white;
-  background-color: #0078d7;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#start-button:hover {
-  background-color: #005bb5;
-}
-
-#game-container {
-  display: none;
-}
-
-#mac-frame {
-  position: relative;
-  width: 70%; /* Largura da moldura */
-  max-width: 1200px; /* Largura máxima */
-  height: 700px; /* Altura da moldura */
-  margin: 50px auto; /* Centraliza a moldura na página */
-  background: #2c2c2e; /* Cor do fundo da moldura */
-  border-radius: 20px; /* Bordas arredondadas, estilo Mac */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra externa */
-  overflow: hidden; /* Garante que nada saia da moldura */
-  border: 8px solid #1c1c1e; /* Cor da borda externa */
-}
-
-#mac-frame::before {
-  content: '';
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px; /* Largura do botão do topo */
-  height: 6px; /* Altura do botão do topo */
-  background: #8e8e93; /* Cor do detalhe do botão */
-  border-radius: 3px;
-}
-
-#game-container {
-  position: absolute;
-  top: 30px; /* Espaçamento para simular a barra superior */
-  left: 0;
-  width: 100%;
-  height: calc(100% - 30px); /* Ajusta a altura para deixar espaço para a barra superior */
-  background: #5a5151; /* Fundo branco para o jogo */
-}
-
