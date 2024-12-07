@@ -72,16 +72,17 @@ const verifyOrganization = () => {
   // Adiciona pontos do tempo restante
   score += timeRemaining;
 
-  // Atualiza a mensagem de resultado
+  // Exibe a pontuação e a mensagem apropriada
   if (!allFilled) {
-    message.textContent = "Você precisa preencher todas as dropzones!";
+    message.textContent = "Você precisa preencher todos os espaços abaixo!";
     message.style.color = "orange";
-  } else if (score > 0) {
-    message.textContent = `Seu código é: ${score}`;
-    message.style.color = "green";
-  } else {
-    message.textContent = "Organize para receber o código!";
+    message.style.textShadow = "1px 2px black"; // Sombra preta com deslocamento
+  } else if (!allCorrect) {
+    message.textContent = `Seu código é: ${score}. A organização está incorreta!`;
     message.style.color = "red";
+  } else {
+    message.textContent = `Parabéns! Seu código é: ${score}`;
+    message.style.color = "green";
   }
 
   // Exibe o botão de reinício após verificar
