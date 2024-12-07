@@ -68,9 +68,9 @@ const calculateScore = (addTime = true) => {
 
   // Exibe a mensagem final em um pop-up
   if (score > 0) {
-    alert(`Seu código é ${score}.`);
+    alert(`Seu código é: ${score}`);
   } else {
-    alert(`Você fez 0 pontos. Tente novamente!`);
+    alert(`Organize para receber o código!`);
   }
 
   // Esconde o botão "Verificar" após a verificação
@@ -128,9 +128,12 @@ dropzones.forEach(zone => {
         iconsInDropzones++; // Incrementa o contador de ícones nas dropzones
       }
 
-      zone.appendChild(draggedElement);
+      // Remove classes de erro, se existirem
+      zone.classList.remove('wrong');
       zone.classList.add('correct');
+      zone.appendChild(draggedElement); // Move o ícone para a dropzone correta
     } else {
+      // Marca como erro
       zone.classList.add('wrong');
     }
 
