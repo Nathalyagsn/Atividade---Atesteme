@@ -15,6 +15,8 @@ const restartButton = document.getElementById('restart-button');
 let timeRemaining = 30; // Tempo em segundos
 let timerInterval;
 let iconsInDropzones = 0; // Contador de ícones nas dropzones
+let score = 0; // Pontuação inicial
+let gameVerified = false; // Controle para impedir verificações duplicadas
 
 // Função para embaralhar os ícones
 const shuffleIcons = () => {
@@ -37,34 +39,50 @@ const startTimer = () => {
 
     if (timeRemaining <= 0) {
       clearInterval(timerInterval);
-      verifyOrganization(); // Verifica automaticamente quando o tempo acaba
+      calculateScore(false); // Calcula a pontuação apenas com as dropzones
     }
   }, 1000);
 };
 
-// Função para verificar a organização
-const verifyOrganization = () => {
-  let correct = true;
+// Função para calcular a pontuação final
+const calculateScore = (addTime = true) => {
+  if (gameVerified) return; // Evita múltiplas verificações
+  gameVerified = true; // Marca o jogo como verificado
 
+  // Pontuação baseada nos ícones nas dropzones
   dropzones.forEach(zone => {
     const children = zone.querySelectorAll('.icon');
     children.forEach(child => {
-      if (child.getAttribute('data-type') !== zone.getAttribute('data-type')) {
-        correct = false;
+      if (child.getAttribute('data-type') === zone.getAttribute('data-type')) {
+        score += 1; // Pontuação positiva para ícones corretos
+      } else {
+        score -= 1; // Pontuação negativa para ícones incorretos
       }
     });
   });
 
-  if (correct) {
-    message.textContent = 'Parabéns! O código da sua atividade é 12345.';
-    message.style.color = 'green';
-  } else {
-    message.textContent = 'Você errou! O código da sua atividade é 67890.';
-    message.style.color = 'red';
+  // Adiciona os pontos do tempo restante (se aplicável)
+  if (addTime && timeRemaining > 0) {
+    score += timeRemaining;
   }
 
-  // Exibe o botão de reinício após a verificação
+  // Exibe a mensagem final em um pop-up
+  if (score > 0) {
+    alert(`Seu código é ${score}.`);
+  } else {
+    alert(`Você fez 0 pontos. Tente novamente!`);
+  }
+
+  // Esconde o botão "Verificar" após a verificação
+  verifyButton.style.display = 'none';
+  // Exibe o botão de reinício
   restartIcon.style.display = 'block';
+};
+
+// Evento para verificar a organização
+const verifyOrganization = () => {
+  clearInterval(timerInterval); // Para o timer
+  calculateScore(); // Calcula os pontos finais e exibe a mensagem
 };
 
 // Evento para iniciar o jogo
@@ -102,23 +120,23 @@ dropzones.forEach(zone => {
     const draggedId = e.dataTransfer.getData('id');
     const zoneType = zone.getAttribute('data-type');
 
-    if (draggedType === zoneType) {
-      const draggedElement = document.getElementById(draggedId);
+    const draggedElement = document.getElementById(draggedId);
 
-      // Evita múltiplos drops do mesmo ícone
+    // Adiciona o elemento na dropzone correta
+    if (draggedType === zoneType) {
       if (!draggedElement.parentElement.classList.contains('dropzone')) {
         iconsInDropzones++; // Incrementa o contador de ícones nas dropzones
       }
 
       zone.appendChild(draggedElement);
       zone.classList.add('correct');
-
-      // Verifica se todos os ícones foram movidos
-      if (iconsInDropzones === icons.length) {
-        verifyButton.style.display = 'inline-block'; // Exibe o botão "Verificar"
-      }
     } else {
       zone.classList.add('wrong');
+    }
+
+    // Verifica se todos os ícones foram movidos
+    if (iconsInDropzones === icons.length) {
+      verifyButton.style.display = 'inline-block'; // Exibe o botão "Verificar"
     }
   });
 });
