@@ -89,12 +89,27 @@ const verifyOrganization = () => {
   verifyButton.style.display = 'none'; // Esconde o botão "Verificar"
 };
 
+// Função que verifica se todas as dropzones estão preenchidas e não há ícones sobrando
+const checkAllDropzonesFilled = () => {
+  const iconsOutsideDropzones = Array.from(document.querySelectorAll('.icon')).filter( icon => !icon.closest('.dropzone')); // Ícones fora das dropzones
+  
+  console.log(`valor icones fora dropzone: ${iconsOutsideDropzones.length}`);
+
+  if (iconsOutsideDropzones.length === 0) {
+    verifyButton.style.display = 'inline-block';
+  }else {
+    verifyButton.style.display = 'none';
+  }
+
+};
+
 // Evento para iniciar o jogo
 startButton.addEventListener('click', () => {
   startScreen.style.display = 'none'; // Esconde a tela inicial
   gameContainer.style.display = 'block'; // Exibe o jogo
   shuffleIcons(); // Embaralha os ícones
   startTimer(); // Inicia o timer
+  checkAllDropzonesFilled();
 });
 
 // Evento de clique no botão "Verificar"
@@ -129,16 +144,6 @@ dropzones.forEach(zone => {
     checkAllDropzonesFilled();
   });
 });
-
-// Função que verifica se todas as dropzones estão preenchidas
-const checkAllDropzonesFilled = () => {
-  const allFilled = Array.from(dropzones).every(zone => zone.querySelectorAll('.icon').length > 2);
-  if (allFilled) {
-    verifyButton.style.display = 'inline-block'; // Exibe o botão "Verificar" quando todas as dropzones estiverem preenchidas
-  } else {
-    verifyButton.style.display = 'none'; // Garante que o botão seja escondido
-  }
-};
 
 // Evento para reiniciar o jogo (recarregar a página)
 restartButton.addEventListener('click', () => {
