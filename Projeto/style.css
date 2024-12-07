@@ -35,13 +35,14 @@ h1 {
 #mac-frame::before {
   content: '';
   position: absolute;
-  top: 10px;
-  left: 50%;
+  top: 10px; /* Distância do topo */
+  left: 50%; /* Centraliza horizontalmente */
   transform: translateX(-50%);
-  width: 100px; /* Largura do botão do topo */
-  height: 6px; /* Altura do botão do topo */
-  background: #8e8e93; /* Cor do detalhe do botão */
-  border-radius: 3px;
+  width: 12px; /* Diâmetro da bolinha */
+  height: 12px; /* Diâmetro da bolinha */
+  background: #8e8e93; /* Cor da bolinha */
+  border-radius: 50%; /* Transformar em círculo */
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5); /* Adiciona uma leve sombra */
 }
 
 /* Área de jogo */
@@ -52,6 +53,7 @@ h1 {
   width: 100%;
   height: calc(100% - 30px); /* Ajusta a altura para deixar espaço para a barra superior */
   background: #5a5151; /* Fundo branco para o jogo */
+  
 }
 
 /* Tela inicial */
