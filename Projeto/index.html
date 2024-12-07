@@ -8,23 +8,17 @@
   <link rel="shortcut icon" href="favicon/favicon-16x16.png" type="image/x-icon">
 </head>
 <body>
-  <!-- Ícone de reinício -->
-  <div id="restart-icon" style="display: none;">
-    <button id="restart-button" title="Reiniciar">🔄</button>
-  </div>
-
   <div id="mac-frame">
     <!-- Tela inicial com tutorial -->
     <div id="start-screen">
       <h1>Bem-vindo ao Jogo de Organização!</h1>
       <button id="start-button">Iniciar</button>
-      <p>Arraste os ícones para os locais corretos antes que o tempo acabe.  Use todos os ícones para ganhar pontos!</p>
+      <p>Arraste os ícones para os locais corretos antes que o tempo acabe. Use todos os ícones para ganhar pontos!</p>
       <p>Clique em "Verificar" para validar suas respostas.</p>
     </div>
 
     <!-- Tela de jogo -->
     <div id="game-container" style="display: none;">
-
       <!-- Temporizador -->
       <div class="timer">
         Tempo restante: <span id="time">30</span> segundos
@@ -90,11 +84,15 @@
 
       <!-- Controles -->
       <div class="controls">
+        <!-- Botão de Verificar (escondido inicialmente) -->
         <button id="verify" style="display: none;">Verificar</button>
       </div>
 
       <!-- Mensagem de resultado -->
       <p id="message"></p>
+
+      <!-- Botão de reinício (escondido inicialmente) -->
+      <button id="restart-button" style="display: none;">Reiniciar</button>
     </div>
   </div>
 

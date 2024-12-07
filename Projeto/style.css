@@ -187,17 +187,19 @@ h1 {
 }
 
 #restart-button {
-  background: transparent;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
+  display: none; /* Esconde o botão inicialmente */
+  margin-top: 10px; /* Distância entre a mensagem e o botão */
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4CAF50; /* Verde */
   color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 #restart-button:hover {
-  color: #28a745; /* Verde */
-  transform: scale(1.1);
-  transition: all 0.3s ease;
+  background-color: #45a049; /* Verde mais escuro no hover */
 }
 
 /* Botão genérico */

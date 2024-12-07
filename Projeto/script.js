@@ -8,7 +8,6 @@ const verifyButton = document.getElementById('verify');
 const message = document.getElementById('message');
 const timeDisplay = document.getElementById('time');
 const iconContainer = document.getElementById('icon-container');
-const restartIcon = document.getElementById('restart-icon');
 const restartButton = document.getElementById('restart-button');
 
 // Variáveis de controle
@@ -86,7 +85,7 @@ const verifyOrganization = () => {
   }
 
   // Exibe o botão de reinício após verificar
-  restartIcon.style.display = 'block';
+  restartButton.style.display = 'block'; // Exibe o botão de reinício
   verifyButton.style.display = 'none'; // Esconde o botão "Verificar"
 };
 
@@ -126,17 +125,20 @@ dropzones.forEach(zone => {
       zone.appendChild(draggedElement); // Move o ícone para a dropzone
     }
 
-    // Verifica se todos os ícones foram movidos
-    const totalIconsPlaced = Array.from(dropzones).reduce(
-      (sum, zone) => sum + zone.querySelectorAll('.icon').length,
-      0
-    );
-
-    if (totalIconsPlaced === icons.length) {
-      verifyButton.style.display = 'inline-block'; // Exibe o botão "Verificar"
-    }
+    // Verifica se todas as dropzones estão preenchidas
+    checkAllDropzonesFilled();
   });
 });
+
+// Função que verifica se todas as dropzones estão preenchidas
+const checkAllDropzonesFilled = () => {
+  const allFilled = Array.from(dropzones).every(zone => zone.querySelectorAll('.icon').length > 2);
+  if (allFilled) {
+    verifyButton.style.display = 'inline-block'; // Exibe o botão "Verificar" quando todas as dropzones estiverem preenchidas
+  } else {
+    verifyButton.style.display = 'none'; // Garante que o botão seja escondido
+  }
+};
 
 // Evento para reiniciar o jogo (recarregar a página)
 restartButton.addEventListener('click', () => {
