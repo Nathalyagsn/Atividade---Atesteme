@@ -11,10 +11,11 @@ const iconContainer = document.getElementById('icon-container');
 const restartButton = document.getElementById('restart-button');
 
 // Variáveis de controle
-let timeRemaining = 30; // Tempo inicial
+let timeRemaining = 30; 
 let timerInterval;
-let score = 0; // Pontuação inicial
-let gameVerified = false; // Controle de verificação única
+let score = 0;
+let gameVerified = false; 
+let gamefinished = false;
 
 // Função para embaralhar os ícones
 const shuffleIcons = () => {
@@ -34,21 +35,21 @@ const startTimer = () => {
 
     if (timeRemaining <= 0) {
       clearInterval(timerInterval);
-      verifyOrganization(); // Verifica automaticamente ao término do tempo
+      verifyOrganization();
+      gamefinished = true;
     }
   }, 1000);
 };
 
 // Função para verificar e calcular a pontuação
 const verifyOrganization = () => {
-  if (gameVerified) return; // Impede múltiplas verificações
+  if (gameVerified) return;
   gameVerified = true;
 
-  // Para o timer
   clearInterval(timerInterval);
 
-  let allCorrect = true; // Verifica se todos os ícones estão corretos
-  let allFilled = true; // Verifica se todas as dropzones estão preenchidas
+  let allCorrect = true; 
+  let allFilled = true;
 
   dropzones.forEach(zone => {
     const children = zone.querySelectorAll('.icon');
@@ -75,7 +76,7 @@ const verifyOrganization = () => {
   if (!allFilled) {
     message.textContent = "Você precisa preencher todos os espaços abaixo!";
     message.style.color = "orange";
-    message.style.textShadow = "1px 2px black"; // Sombra preta com deslocamento
+    message.style.textShadow = "1px 2px black";
   } else if (!allCorrect) {
     message.textContent = `Seu código é: ${score}. A organização está incorreta!`;
     message.style.color = "red";
@@ -84,16 +85,13 @@ const verifyOrganization = () => {
     message.style.color = "green";
   }
 
-  // Exibe o botão de reinício após verificar
-  restartButton.style.display = 'block'; // Exibe o botão de reinício
-  verifyButton.style.display = 'none'; // Esconde o botão "Verificar"
+  restartButton.style.display = 'block'; 
+  verifyButton.style.display = 'none'; 
 };
 
 // Função que verifica se todas as dropzones estão preenchidas e não há ícones sobrando
 const checkAllDropzonesFilled = () => {
-  const iconsOutsideDropzones = Array.from(document.querySelectorAll('.icon')).filter( icon => !icon.closest('.dropzone')); // Ícones fora das dropzones
-  
-  console.log(`valor icones fora dropzone: ${iconsOutsideDropzones.length}`);
+  const iconsOutsideDropzones = Array.from(document.querySelectorAll('.icon')).filter( icon => !icon.closest('.dropzone'));
 
   if (iconsOutsideDropzones.length === 0) {
     verifyButton.style.display = 'inline-block';
@@ -105,29 +103,36 @@ const checkAllDropzonesFilled = () => {
 
 // Evento para iniciar o jogo
 startButton.addEventListener('click', () => {
-  startScreen.style.display = 'none'; // Esconde a tela inicial
-  gameContainer.style.display = 'block'; // Exibe o jogo
-  shuffleIcons(); // Embaralha os ícones
-  startTimer(); // Inicia o timer
+  startScreen.style.display = 'none';
+  gameContainer.style.display = 'block'; 
+  shuffleIcons();
+  startTimer(); 
   checkAllDropzonesFilled();
 });
 
 // Evento de clique no botão "Verificar"
 verifyButton.addEventListener('click', () => {
-  verifyOrganization(); // Verifica a organização ao clicar
+  gamefinished = true;
+  verifyOrganization();
 });
 
 // Lógica de arrastar e soltar (drag and drop)
 icons.forEach(icon => {
   icon.addEventListener('dragstart', e => {
-    e.dataTransfer.setData('type', icon.getAttribute('data-type'));
-    e.dataTransfer.setData('id', icon.id);
+    if (gamefinished === false) {
+      e.dataTransfer.setData('type', icon.getAttribute('data-type'));
+      e.dataTransfer.setData('id', icon.id);
+    } else {
+      e.preventDefault(); 
+      console.log('Ação de arrastar bloqueada: o jogo já terminou.');
+    }
   });
 });
 
+
 dropzones.forEach(zone => {
   zone.addEventListener('dragover', e => {
-    e.preventDefault(); // Necessário para permitir o drop
+    e.preventDefault();
   });
 
   zone.addEventListener('drop', e => {
@@ -137,15 +142,14 @@ dropzones.forEach(zone => {
     const draggedElement = document.getElementById(draggedId);
 
     if (!zone.contains(draggedElement)) {
-      zone.appendChild(draggedElement); // Move o ícone para a dropzone
+      zone.appendChild(draggedElement);
     }
 
-    // Verifica se todas as dropzones estão preenchidas
     checkAllDropzonesFilled();
   });
 });
 
 // Evento para reiniciar o jogo (recarregar a página)
 restartButton.addEventListener('click', () => {
-  location.reload(); // Recarrega a página para reiniciar o jogo
+  location.reload(); 
 });
