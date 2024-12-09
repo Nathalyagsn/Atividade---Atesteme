@@ -21,45 +21,45 @@ h1 {
 /* Moldura do Mac */
 #mac-frame {
   position: relative;
-  width: 70%; /* Largura da moldura */
-  max-width: 1200px; /* Largura máxima */
-  height: 700px; /* Altura da moldura */
-  margin: 50px auto; /* Centraliza a moldura na página */
-  background: #2c2c2e; /* Cor do fundo da moldura */
-  border-radius: 20px; /* Bordas arredondadas, estilo Mac */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra externa */
-  overflow: hidden; /* Garante que nada saia da moldura */
-  border: 8px solid #1c1c1e; /* Cor da borda externa */
+  width: 70%; 
+  max-width: 1200px; 
+  height: 700px; 
+  margin: 50px auto; 
+  background: #2c2c2e;
+  border-radius: 20px; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+  overflow: hidden;
+  border: 8px solid #1c1c1e; 
 }
 
 #mac-frame::before {
   content: '';
   position: absolute;
-  top: 10px; /* Distância do topo */
-  left: 50%; /* Centraliza horizontalmente */
+  top: 10px; 
+  left: 50%; 
   transform: translateX(-50%);
-  width: 12px; /* Diâmetro da bolinha */
-  height: 12px; /* Diâmetro da bolinha */
-  background: #8e8e93; /* Cor da bolinha */
-  border-radius: 50%; /* Transformar em círculo */
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5); /* Adiciona uma leve sombra */
+  width: 12px; 
+  height: 12px; 
+  background: #8e8e93; 
+  border-radius: 50%; 
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5); 
 }
 
 /* Tela inicial */
 #start-screen {
   display: flex;
-  flex-direction: column; /* Organiza os itens em coluna */
-  justify-content: center; /* Centraliza verticalmente */
-  align-items: center; /* Centraliza horizontalmente */
-  height: 100%; /* Ocupa toda a altura do `mac-frame` */
-  background: rgba(0, 0, 0, 0.8); /* Fundo escuro */
-  color: white; /* Cor do texto */
-  text-align: center; /* Centraliza o texto */
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+  height: 100%; 
+  background: rgba(0, 0, 0, 0.8); 
+  color: white; 
+  text-align: center; 
 }
 
 #start-screen h1 {
-  font-size: 28px; /* Tamanho do título */
-  margin-bottom: 20px; /* Espaçamento abaixo do título */
+  font-size: 28px; 
+  margin-bottom: 20px; 
 }
 
 #start-button {
@@ -79,14 +79,14 @@ h1 {
 /* Área de jogo */
 #game-container {
   position: absolute;
-  top: 30px; /* Espaçamento para simular a barra superior */
+  top: 30px; 
   left: 0;
   width: 100%;
-  height: calc(100% - 30px); /* Ajusta a altura para deixar espaço para a barra superior */
-  background-image: url('imagens/imagemFundo.jpg'); /* Substitua pela URL da imagem */
-  background-size: cover; /* Faz a imagem cobrir toda a área */
-  background-position: center; /* Centraliza a imagem */
-  background-repeat: no-repeat; /* Impede que a imagem se repita */
+  height: calc(100% - 30px); 
+  background-image: url('imagens/imagemFundo.jpg'); 
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
 }
 
 /* Ícones */
@@ -114,22 +114,22 @@ h1 {
 /* Áreas de drop */
 .dropzones-container {
   display: flex;
-  justify-content: left center; /* Centraliza as dropzones horizontalmente */
-  align-items: center; /* Alinha as dropzones verticalmente */
-  position: fixed; /* Fixa na parte inferior da tela */
-  bottom: 20px; /* Define a distância do rodapé */
-  width: 100%; /* Largura total da tela */
-  gap: 225px; /* Espaçamento entre as dropzones */
+  justify-content: left center; 
+  align-items: center; 
+  position: fixed; 
+  bottom: 20px; 
+  width: 100%; 
+  gap: 225px; 
 }
 
 .dropzone-wrapper {
   display: flex;
-  flex-direction: column; /* Organiza o título acima da dropzone */
-  align-items: center; /* Centraliza a barra indicativa horizontalmente */
+  flex-direction: column; 
+  align-items: center; 
 }
 
 .dropzone-title {
-  margin-bottom: 1px; /* Espaçamento entre o título e a dropzone */
+  margin-bottom: 1px; 
   color: white;
   font-size: 16px;
   font-weight: bold;
@@ -137,45 +137,45 @@ h1 {
 }
 
 .dropzone {
-  position: relative; /* Necessário para posicionar a barrinha interna */
-  width: 280px; /* Largura fixa */
-  height: 150px; /* Altura fixa */
-  background: #2c2c2e; /* Fundo estilo Finder */
-  border: 1px solid #444; /* Borda escura */
-  border-radius: 6px; /* Bordas levemente arredondadas */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); /* Sombra para profundidade */
-  display: flex; /* Flexbox para centralizar ícones */
-  justify-content: center; /* Centraliza horizontalmente */
-  align-items: center; /* Centraliza verticalmente */
-  overflow: hidden; /* Evita que elementos saiam da área */
+  position: relative; 
+  width: 280px; 
+  height: 150px; 
+  background: #2c2c2e; 
+  border: 1px solid #444; 
+  border-radius: 6px; 
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  overflow: hidden; 
 }
 
 .dropzone::after {
   content: attr(data-type); /* Insere o texto com o tipo (file, folder, program) */
   position: absolute;
-  bottom: 5px; /* Posiciona próximo ao fundo */
-  left: 50%; /* Centraliza horizontalmente */
+  bottom: 5px; 
+  left: 50%; 
   transform: translateX(-50%);
-  font-size: 12px; /* Tamanho pequeno */
-  color: #ffffff; /* Cor do texto branca */
-  background: #0078d7; /* Fundo azul estilo barra Finder */
-  padding: 2px 10px; /* Pequena barra */
-  border-radius: 4px; /* Arredonda as bordas da barra */
-  text-transform: capitalize; /* Primeira letra em maiúsculo */
+  font-size: 12px; 
+  color: #ffffff; 
+  background: #0078d7; 
+  padding: 2px 10px; 
+  border-radius: 4px; 
+  text-transform: capitalize; 
 }
 
 .dropzone:hover {
-  background: rgba(255, 255, 255, 0.2); /* Realce ao passar o mouse */
+  background: rgba(255, 255, 255, 0.2); 
 }
 
 .dropzone.correct {
-  border-color: #28a745; /* Verde para correto */
-  background-color: rgba(40, 167, 69, 0.2); /* Fundo verde claro */
+  border-color: #28a745; 
+  background-color: rgba(40, 167, 69, 0.2); 
 }
 
 .dropzone.wrong {
-  border-color: #dc3545; /* Vermelho para incorreto */
-  background-color: rgba(220, 53, 69, 0.2); /* Fundo vermelho claro */
+  border-color: #dc3545; 
+  background-color: rgba(220, 53, 69, 0.2); 
 }
 
 /* Botão de reinício */
@@ -187,11 +187,11 @@ h1 {
 }
 
 #restart-button {
-  display: none; /* Esconde o botão inicialmente */
+  display: none; 
   margin: 20px auto 0;
   padding: 11px 20px;
   font-size: 16px;
-  background-color: #4CAF50; /* Verde */
+  background-color: #4CAF50; 
   color: white;
   border: none;
   border-radius: 5px;
@@ -200,7 +200,7 @@ h1 {
 }
 
 #restart-button:hover {
-  background-color: #45a049; /* Verde mais escuro no hover */
+  background-color: #45a049; 
 }
 
 /* Botão genérico */
