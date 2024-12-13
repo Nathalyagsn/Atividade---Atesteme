@@ -23,7 +23,7 @@ Este projeto é uma aplicação interativa onde o usuário organiza ícones arra
 - Reinício: Possibilidade de reiniciar o jogo para tentar novamente.
 ## Tecnologias Utilizadas
 - HTML: Estrutura da interface.
-- SS: Estilização, incluindo a simulação de uma moldura de Macbook.
+- CSS: Estilização, incluindo a simulação de uma moldura de Macbook.
 - JavaScript: Lógica do jogo, arrastar e soltar (drag and drop), cálculo de pontuação e interatividade.
 ## Como Executar o Projeto
 1 - Clone o repositório:
